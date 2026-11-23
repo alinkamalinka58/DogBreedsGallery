@@ -32,7 +32,7 @@ class BreedRepository(
             }
             dao.insertBreeds(entities)
         } catch (e: Exception) {
-            // Если сети нет, просто ничего не делаем — данные уже в БД
+            android.util.Log.e("API_ERROR", "Ошибка при загрузке пород", e)
             e.printStackTrace()
         }
     }

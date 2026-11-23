@@ -34,6 +34,13 @@ object AppDependencies {
             }
             val client = OkHttpClient.Builder()
                 .addInterceptor(logging)
+                // Добавляем ключ в заголовок
+                .addInterceptor { chain ->
+                    val request = chain.request().newBuilder()
+                        .addHeader("x-api-key", "live_OJQvLReuLtyQTq29EClJtCGNmDBViIf6wIcydtHbtHtDSa6rwiGj2IIKEbva59Qv")
+                        .build()
+                    chain.proceed(request)
+                }
                 .build()
             api = Retrofit.Builder()
                 .baseUrl("https://api.thedogapi.com/v1/")

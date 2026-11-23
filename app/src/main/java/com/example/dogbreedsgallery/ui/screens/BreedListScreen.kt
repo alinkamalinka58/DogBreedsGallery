@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.example.dogbreedsgallery.data.local.entity.BreedEntity
@@ -32,6 +33,10 @@ fun BreedListScreen(
             TopAppBar(
                 title = { Text("Dog Breeds") },
                 actions = {
+                    // Добавляем кнопку обновления
+                    IconButton(onClick = { viewModel.refresh() }) {
+                        Text("🔄", fontSize = 20.sp)
+                    }
                     TextButton(onClick = onFavoritesClick) {
                         Text("Favorites")
                     }
