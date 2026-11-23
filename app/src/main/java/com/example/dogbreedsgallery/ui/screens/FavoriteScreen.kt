@@ -45,7 +45,10 @@ fun FavoriteScreen(
                         modifier = Modifier.fillMaxWidth().padding(8.dp)
                             .clickable { onBreedClick(breed.id) }
                     ) {
-                        Row(modifier = Modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
+                        Row(
+                            modifier = Modifier.padding(8.dp),
+                            verticalAlignment = Alignment.CenterVertically // <-- Выравниваем по центру
+                        ) {
                             AsyncImage(
                                 model = breed.imageUrl,
                                 contentDescription = breed.name,
@@ -53,7 +56,15 @@ fun FavoriteScreen(
                                 contentScale = ContentScale.Crop
                             )
                             Spacer(Modifier.width(12.dp))
-                            Text(breed.name, style = MaterialTheme.typography.titleMedium)
+                            // Добавляем weight(1f), чтобы текст занимал всё свободное место, а сердечко прижалось к краю
+                            Text(breed.name, style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
+
+                            // Добавляем кнопку удаления из избранного
+                            IconButton(onClick = {
+                                viewModel.toggleFavorite(breed.id, true) // true = сейчас в избранном, значит убираем
+                            }) {
+                                Text("❤️")
+                            }
                         }
                     }
                 }
